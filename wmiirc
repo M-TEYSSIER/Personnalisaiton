@@ -16,8 +16,9 @@ noticetimeout=5
 noticebar=/rbar/!notice
 
 # Colors tuples: "<text> <background> <border>"
-export WMII_NORMCOLORS='#000000 #c1c48b #81654f'
 export WMII_FOCUSCOLORS='#000000 #81654f #000000'
+#export WMII_NORMCOLORS='#ffffff #000000 #81654f'
+ export WMII_NORMCOLORS='#000000 #c1c48b #81654f'
 
 export WMII_BACKGROUND='#333333'
 export WMII_FONT='-*-fixed-medium-r-*-*-*-120-75-75-c-60-iso10646-*'
@@ -46,8 +47,8 @@ histnum=5000
 # Column Rules
 wmiir write /colrules <<!
     /gimp/ -> 17+83+41
-    /.*/ -> 50+50
-	#/.*/ -> 62+38 # Golden Ratio
+    #/.*/ -> 50+50
+    /.*/ -> 62+38 # Golden Ratio
 !
 
 # Tagging Rules
@@ -65,12 +66,15 @@ wmiir write /rules <<!
 !
 
 # Status Bar Info
-status() {
-	echo -n label $(uptime | sed 's/.*://; s/, / /g') '|' $(date) '|' $(acpi| cut -d " " -f 4| sed -e "s/,//g")'('$(acpi| cut -d " " -f 5| sed -e "s/,//g")')'
-}
+status(){  
+	echo label $(cat /proc/cpuinfo | grep -i "^cpu MHz" | awk -F": " '{print $2}' | head -4 | sed ':a;N;$!ba;s/\n/ /g'| sed -e "s/\./ /g" | cut -d " " -f 1,3,5,7) '|' $(hostname -s) '|' Volume: $(amixer  | grep "Front Right:" | cut -d " " -f 7 | sed ':a;N;$!ba;s/\n//g' | cut -d "[" -f 2 | cut -d "]" -f 1)  '|' '@Pub:'$(wget -qO - icanhazip.com) '-' '@Priv:'$(hostname -I)  '|' $(date | cut -d " " -f 1,2,3,4,5 | sed "s/,//g") '|' $(acpi -b| cut -d " " -f 3,4,5| sed -e "s/,//g")   
+ }
 
 # Generic overridable startup details
-startup() { witray & }
+startup() {
+    wmiir xwrite /ctl bar on top
+     witray &
+}
 
 wi_runconf -s wmiirc_local
 startup
@@ -217,16 +221,21 @@ Key $MODKEY-Return # Launch a terminal
 
 
 Key $MODKEY-F12
-	amixer -q sset Master 3%+ 
+	amixer -q sset Master 2%+ 
 Key $MODKEY-F11
-	amixer -q sset Master 3%-
-
-Key $MODKEY-Control-g
-	google-chrome &
-
+	amixer -q sset Master 2%-
+Key $MODKEY-F10
+	amixer -q sset Master 0%
+Key $MODKEY-Shift-G
+	google-chrome & 
 Key $MODKEY-Shift-L
 	xtrlock
-
+Key $MODKEY-Shift-S
+    spotify &
+Key $MODKEY-Shift-B
+    buttercup-desktop &
+Key Print
+    gnome-screenshot -i &
 
 
 KeyGroup Other
