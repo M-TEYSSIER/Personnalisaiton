@@ -67,7 +67,7 @@ wmiir write /rules <<!
 
 # Status Bar Info
 status(){  
-	echo label $(cat /proc/cpuinfo | grep -i "^cpu MHz" | awk -F": " '{print $2}' | head -4 | sed ':a;N;$!ba;s/\n/ /g'| sed -e "s/\./ /g" | cut -d " " -f 1,3,5,7) '|' $(hostname -s) '|' Volume: $(amixer  | grep "Front Right:" | cut -d " " -f 7 | sed ':a;N;$!ba;s/\n//g' | cut -d "[" -f 2 | cut -d "]" -f 1)  '|' '@Pub:'$(wget -qO - icanhazip.com) '-' '@Priv:'$(hostname -I)  '|' $(date | cut -d " " -f 1,2,3,4,5 | sed "s/,//g") '|' $(acpi -b| cut -d " " -f 3,4,5| sed -e "s/,//g")   
+	echo label $( cat /proc/cpuinfo | grep -i "^cpu MHz" | awk -F": " '{print $2}' | head -4 | sed ':a;N;$!ba;s/\n/ /g'| sed -e "s/\./ /g" | cut -d " " -f 1,3,5,7) '|' $(hostname -s) '|' Volume: $(amixer  | grep "Front Right:" | cut -d " " -f 7 | sed ':a;N;$!ba;s/\n//g' | cut -d "[" -f 2 | cut -d "]" -f 1)  '|' '@Pub:'$(wget -qO - icanhazip.com) '-' '@Priv:'$(hostname -I)  '|' $(date | cut -d " " -f 1,2,3,4,5 | sed "s/,//g") '|' $(acpi -b| cut -d " " -f 3,4,5| sed -e "s/,//g")   
  }
 
 # Generic overridable startup details
@@ -229,7 +229,7 @@ Key $MODKEY-F10
 Key $MODKEY-Shift-G
 	google-chrome & 
 Key $MODKEY-Shift-L
-	xtrlock
+	xtrlock 
 Key $MODKEY-Shift-S
     spotify &
 Key $MODKEY-Shift-B
