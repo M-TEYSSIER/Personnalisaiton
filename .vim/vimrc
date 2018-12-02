@@ -32,7 +32,6 @@ Plugin 'itchyny/lightline.vim'                  " Plugin pour la barre d'informa
 Plugin 'itchyny/vim-gitbranch'                  " Plugin pour ajouter des fonctionnalité git sur la barre 
 Plugin 'scrooloose/nerdtree'                    " Plugin pour l'arborescence du système
 Plugin 'tpope/vim-fugitive'                     " Plugin pour gerer les fonctionnalité git dans VIM
-Plugin 'Valloric/YouCompleteMe'                 " Plugin est un moteur de complétion de code
 
 call vundle#end()                                       
 filetype plugin indent on    
@@ -89,16 +88,3 @@ let g:lightline = {
       \   'gitbranch': 'gitbranch#name'
       \ },
       \ }
-
-
-
-let g:ycm_python_interpreter_path = ''          
-let g:ycm_python_sys_path = []
-let g:ycm_extra_conf_vim_data = [
-  \  'g:ycm_python_interpreter_path',
-  \  'g:ycm_python_sys_path'
-  \]
-let g:ycm_python_binary_path = 'python'
-let g:ycm_key_list_select_completion=[]
-let g:ycm_key_list_previous_completion=[]
-let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
